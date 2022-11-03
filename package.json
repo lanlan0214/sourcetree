@@ -1,0 +1,45 @@
+{
+  "name": "tsc-printer-frontend",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "lint:script": "eslint --ext .js --ignore-path .gitignore .",
+    "lint:style": "stylelint src/**/*.{css,scss,vue}",
+    "compile:style": "sass --no-source-map --watch src/assets/scss:src/assets/css"  
+  },
+  "devDependencies": {
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.6.0",
+    "postcss": "^8.4.16",
+    "postcss-html": "^1.5.0",
+    "postcss-scss": "^4.0.4",
+    "prettier": "^2.7.1",
+    "sass": "^1.55.0",
+    "stylelint": "^14.11.0",
+    "stylelint-config-recommended": "^9.0.0",
+    "stylelint-config-recommended-scss": "^7.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-sass-guidelines": "^9.0.1",
+    "stylelint-config-standard": "^28.0.0",
+    "stylelint-config-standard-scss": "^5.0.0",
+    "stylelint-order": "^5.0.0"
+  },
+  "description": "TSC printer frontend - Vanilla JS and HTML",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeeeeT/tsc-printer-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NeeeeT/tsc-printer-frontend/issues"
+  },
+  "homepage": "https://github.com/NeeeeT/tsc-printer-frontend#readme"
+}

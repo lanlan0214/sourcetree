@@ -1,0 +1,170 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSC Printer - Index</title>
+  <!-- external styles START -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./src/assets/css/reset.css">
+  <link rel="stylesheet" href="./src/assets/css/index.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.913/styles/kendo.default-ocean-blue.min.css" />  
+  <!-- external styles END -->
+  <!-- external scripts START-->
+  <script src="https://kendo.cdn.telerik.com/2022.3.913/js/jquery.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/2022.3.913/js/jszip.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/2022.3.913/js/kendo.all.min.js"></script>
+  <!-- Vue3.js -->
+  <script src="./vue.global.js"></script>
+  <!-- external scripts END-->
+</head>
+<body>
+  <div id="app" class="system-page">
+    <div class="system-wrapper">
+      <img
+        v-show="!sidebarToggle"
+        class='sidebar-toggle-on' src="./src/assets/img/system/sidebar-toggle.svg"
+        alt=""
+        @click="sidebarToggle = true"
+      >
+      <div :class='{hide: !sidebarToggle}' class="side-bar left">
+        <img
+          class='sidebar-toggle-off' src="./src/assets/img/system/sidebar-toggle.svg"
+          alt=""
+          @click="sidebarToggle = false"
+        >
+        <div class="header">
+          <img src="./src/assets/img/logo.png" alt="">
+          <h6>Printer Groups</h6>
+        </div>
+        <!-- Serach Input -->
+        <div class="search-input-out">
+          <img src="./src/assets/img/search.svg" alt="">
+          <input type="search" name="search" id="group-searcher" placeholder="Search for Printer Group">
+        </div>
+        <!-- Table Switcher -->
+        <div class="table-switcher">
+          <div class="nest-out" v-for="item in sidebar" :key="item.id" @click.self="switchNest(true, item.id)">
+            {{ item.name }}
+            <div class="nest-in" v-show='activeNestOut === item.id' 
+              v-for="child in item.child"
+              :key="child.name"
+              :data-grid="`grid-`+item.id+`-`+child.id"
+              :class="{active: activeNestIn === child.id}"
+              @click.self="switchNest(false, child.id)"
+            >
+              {{ child.name }}
+            </div>
+          </div>
+        </div>
+        <!-- Buttons -->
+        <div class="buttons">
+          <button class="add-new-group">
+            Add New Group
+          </button>
+          <button class="view-all-printers">
+            View All Printers
+          </button>
+        </div>
+      </div>
+      <div class="contents-container right">
+        <div class="header">
+          <div class="infos">
+            <h6>Printer Integration</h6>
+            <!-- Selector & Search  -->
+            <div class="selector-and-search">
+              <div class="selector">
+                <select class='printer-selector' name="printer-selector">
+                  <option value="printer-name">Printer Name</option>
+                  <option value="printer-tag">Printer Tag</option>
+                </select>
+                <img class='icon' src="./src/assets/img/arrow-bot.svg" alt="">
+              </div>
+              <div class="search-input-out">
+                <img src="./src/assets/img/search-white.svg" alt="">
+                <input type="search" name="search" id="group-searcher" placeholder="Search for Printer">
+              </div>
+            </div>
+          </div>
+          <!-- Profile, Action -->
+          <div class="profile-actions">
+            <img class='actions' src="./src/assets/img/system/fuction_button.svg" alt="">
+            <div class="profile">
+              <img class='avatar' src="./src/assets/img/system/avatar.png" alt="" @click="clickMenu">
+              <div class="menu-touch" @click="clickMenu">
+                <span class="name">mutahw</span>
+                <img class='arrow' src="./src/assets/img/system/arrow_bot.svg" alt="">
+              </div>
+            </div>
+            <div class="profile-menu" v-show="menuToggle">
+              <img src="./src/assets/img/system/bubble-menu.png" alt="">
+              <div class="menu-actions">
+                <div class="pref menu-action">
+                  <img src="./src/assets/img/system/pref.svg" alt="">
+                  <span>Preference</span>
+                </div>
+                <div class="reset menu-action">
+                  <img src="./src/assets/img/system/reset.svg" alt="">
+                  <span>Change Password</span>
+                </div>
+                <div class="logout menu-action">
+                  <img src="./src/assets/img/system/logout.svg" alt="">
+                  <span>Log Out</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contents-switcher">
+          <div :class='{active: curContentsType === 0}' class="dashboard" @click="switchContents(0)">Dashboard</div>
+          <div :class='{active: curContentsType === 1}' class="list" @click="switchContents(1)">Printers List</div>
+        </div>
+        <div class="table" v-show="curContentsType === 1">
+          <div id="grid"></div>
+          <div class="plus-button" :class="{active: selectedAmount}">
+            <div class="actions" v-show="tablePlusToggle">
+              <div class="icon-out">
+                <img class='icon add' src="./src/assets/img/menu-add.svg" alt="">
+              </div>
+              <div class="icon-out">
+                <img class='icon info' src="./src/assets/img/menu-infos.svg" alt="">
+              </div>
+              <div class="icon-out">
+                <img class='icon setting' src="./src/assets/img/menu-settings.svg" alt="">
+              </div>
+            </div>
+            <img
+              v-show='!tablePlusToggle'
+              class='icon'
+              src="./src/assets/img/plus.svg"
+              alt=""
+              @click="tablePlusToggle = true"
+            >
+            <img
+              v-show='tablePlusToggle'
+              class='icon'
+              src="./src/assets/img/plus-close.svg"
+              alt=""
+              @click="tablePlusToggle = false"
+            >
+          </div>
+        </div>
+      </div>
+      <div class="selected-action bottom" v-show="false">
+        <div class="selected-close-amount">
+          <img @click='cancelSelection' src="./src/assets/img/system/close.svg" alt="">
+          <span><span style="color: #2958EC;">{{ selectedAmount }}</span> User Selected</span>
+        </div>
+        <div class="actions">
+          <img src="./src/assets/img/system/selected-action-1.svg" alt="">
+          <img src="./src/assets/img/system/selected-action-2.svg" alt="">
+          <img src="./src/assets/img/system/selected-action-3.svg" alt="">
+          <img src="./src/assets/img/system/selected-action-4.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./index.js"></script>
+</body>
+</html>

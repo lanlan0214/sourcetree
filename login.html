@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSC Printer - Loign</title>
+  <!-- external styles START -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./src/assets/css/reset.css">
+  <link rel="stylesheet" href="./src/assets/css/login.css">
+  <!-- external styles END -->
+  <!-- external scripts START-->
+  <!-- Vue3.js -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- external scripts END-->
+</head>
+<body>
+  <div id="app" class="login-page">
+    <img id='background-img' src="./src/assets/img/login/background-cover.png" alt="">
+    <div class="flex-center login-wrapper">
+      <div class="welcome-text">
+        <img src="./src/assets/img/login/welcome-1.png" alt="">
+        <h5>Printer<br>Integration</h5>
+        <span class="welcome">Welcome!</span>
+        <div class="copyright desktop">
+          © 2022 All rights reserved<br>
+          TSC Auto ID Technology Co., Ltd.
+        </div>
+      </div>
+      <div class="input-container">
+        <h3>Login</h3>
+        <input 
+          type="text"
+          id="account-id"
+          name="username"
+          v-model="accountInfo.id"
+          placeholder="ID"
+        >
+        <input 
+          type="password"
+          id="account-pw"
+          name="password"
+          v-model="accountInfo.password"
+          placeholder="Password"
+        >
+        <div class="buttons">
+          <button class="forget" @click="forgetPassword">Forget Password?</button>
+          <button class="login" @click="tryLogin">Login</button>
+        </div>
+      </div>
+      <div class="copyright laptop">
+        © 2022 All rights reserved<br>
+        TSC Auto ID Technology Co., Ltd.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="./login.js"></script>

@@ -1,0 +1,143 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSC Printer - System</title>
+  <!-- external styles START -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./src/assets/css/reset.css">
+  <link rel="stylesheet" href="./src/assets/css/system.css">
+  <link rel="stylesheet" href="./src/assets/css/menu.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.913/styles/kendo.default-ocean-blue.min.css" />  
+  <!-- external styles END -->
+  <!-- external scripts START-->
+  <script src="https://kendo.cdn.telerik.com/2022.3.913/js/jquery.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/2022.3.913/js/kendo.all.min.js"></script>
+  <!-- Vue3.js -->
+  <script src="./vue.global.js"></script>
+  <!-- external scripts END-->
+</head>
+<body>
+  <div id="app" class="system-page">
+    <div class="system-wrapper">
+      <img
+        v-show="!sidebarToggle"
+        class='sidebar-toggle-on' src="./src/assets/img/system/sidebar-toggle.svg"
+        alt=""
+        @click="sidebarToggle = true"
+      >
+      <div :class='{hide: !sidebarToggle}' class="side-bar left">
+        <img
+          class='sidebar-toggle-off' src="./src/assets/img/system/sidebar-toggle.svg"
+          alt=""
+          @click="sidebarToggle = false"
+        >
+        <div class="header">
+          <img src="./src/assets/img/logo.png" alt="">
+          <h6>Printer Groups</h6>
+        </div>
+        <!-- Select Input -->
+        <select name="system-selector">
+          <option value="Role1">Role1</option>
+          <option value="Role2">Role2</option>
+        </select>
+        <!-- Table Switcher -->
+        <div class="table-switcher">
+          <div class="nest-out" v-for="item in sidebar" :key="item.id" @click.self="switchNest(true, item.id)">
+            {{ item.name }}
+            <div class="nest-in" v-show='activeNestOut === item.id' 
+              v-for="child in item.child"
+              :key="child.name"
+              :data-grid="`grid-`+item.id+`-`+child.id"
+              :class="{active: activeNestIn === child.id}"
+              @click.self="switchNest(false, child.id)"
+            >
+              {{child.name}}
+            </div>
+          </div>
+        </div>
+        <!-- Create Button -->
+        <button class="create-role">
+          Create New Role
+        </button>
+      </div>
+      <div class="table-container right">
+        <div class="header">
+          <div class="infos">
+            <h6>Printer Integration</h6>
+            <span class="line"></span>
+            <span>Users and Permissions</span>
+          </div>
+          <!-- menu -->
+          <div class="menu-container" v-show="mainMenuToggle">
+            <div class="main-title">
+              主選單
+            </div>
+            <div class="line-Toggle" @click="clickMainMenu"></div>
+            <div class="menu-detail">
+              <div class="menu-info" v-for="item in mainMenu" :key="item.id">
+                <div class="menu-category">
+                  <div class="title">{{ item.name }}</div>
+                  <div class="line-bottom"></div>
+                  <div class="content">
+                    <div class="info" v-for="child in item.child" :key="child.name">
+                      <img :src="child.icon" alt="" class="icon">
+                      <div class="text">{{ child.name }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Profile, Action -->
+          <div class="profile-actions">
+            <img class='actions' src="./src/assets/img/system/fuction_button.svg" alt="" @click="clickMainMenu">
+            <div class="profile">
+              <img class='avatar' src="./src/assets/img/system/avatar.png" alt="" @click="clickSidebarMenu">
+              <div class="menu-touch" @click="clickSidebarMenu">
+                <span class="name">mutahw</span>
+                <img class='arrow' src="./src/assets/img/system/arrow_bot.svg" alt="">
+              </div>
+            </div>
+            <div class="profile-menu" v-show="menuToggle">
+              <img src="./src/assets/img/system/bubble-menu.png" alt="">
+              <div class="menu-actions">
+                <div class="pref menu-action">
+                  <img src="./src/assets/img/system/pref.svg" alt="">
+                  <span>Preference</span>
+                </div>
+                <div class="reset menu-action">
+                  <img src="./src/assets/img/system/reset.svg" alt="">
+                  <span>Change Password</span>
+                </div>
+                <div class="logout menu-action">
+                  <img src="./src/assets/img/system/logout.svg" alt="">
+                  <span>Log Out</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table">
+          <div id="grid"></div>
+        </div>
+      </div>
+      <div class="selected-action bottom" v-show="selectedAmount">
+        <div class="selected-close-amount">
+          <img @click='cancelSelection' src="./src/assets/img/system/close.svg" alt="">
+          <span><span style="color: #2958EC;">{{ selectedAmount }}</span> User Selected</span>
+        </div>
+        <div class="actions">
+          <img src="./src/assets/img/system/selected-action-1.svg" alt="">
+          <img src="./src/assets/img/system/selected-action-2.svg" alt="">
+          <img src="./src/assets/img/system/selected-action-3.svg" alt="">
+          <img src="./src/assets/img/system/selected-action-4.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./system.js"></script>
+</body>
+</html>

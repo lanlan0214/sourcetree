@@ -1,0 +1,288 @@
+.desktop {
+  display: block;
+}
+
+.laptop {
+  display: none;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  padding: 64px 48px;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+}
+
+#background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-y: scroll;
+  width: 100%;
+  max-width: 1040px;
+  height: 100%;
+  max-height: 100vh;
+}
+
+.input-container {
+  overflow-y: auto;
+  padding: 48px 56px;
+  max-width: 100vw;
+  height: 100%;
+  max-height: 480px;
+  background-color: #fff;
+  border-radius: 16px;
+}
+
+.input-container > h3 {
+  margin-bottom: 56px;
+  font-size: 48px;
+  text-align: left;
+  color: #1c1b2e;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.input-container > input {
+  margin-bottom: 56px;
+  width: 400px;
+  height: 64px;
+  border-bottom: 1px solid #2958ec;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+  color: #000;
+}
+
+.input-container > input::placeholder {
+  font-style: normal;
+  color: #a6abba;
+}
+
+.input-container > .buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.input-container > .buttons > .forget {
+  margin-right: 32px;
+  font-size: 20px;
+  color: #2958ec;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.input-container > .buttons > .login {
+  padding: 10px 24px;
+  width: 96px;
+  height: 48px;
+  font-size: 20px;
+  color: #fff;
+  background: #e4062c;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(228, 6, 44, 0.24);
+  gap: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.welcome-text {
+  height: 100%;
+  max-height: 484px;
+}
+
+.welcome-text > img {
+  margin-bottom: 48px;
+  max-width: 230px;
+  object-fit: contain;
+}
+
+.welcome-text > h5 {
+  margin-bottom: 48px;
+  font-size: 48px;
+  color: #fff;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+.welcome-text > .welcome {
+  position: relative;
+  display: block;
+  margin-bottom: 88px;
+  font-size: 80px;
+  color: #fff;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 80px;
+}
+
+.copyright {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #578def;
+}
+
+@media screen and (max-width: 1024px) {
+  .input-container {
+    padding: 32px;
+  }
+
+  .welcome-text {
+    > img {
+      margin: 0;
+      max-width: 180px;
+    }
+
+    > h5 {
+      margin-top: 16px;
+      margin-bottom: 0;
+      margin-left: 0;
+      font-size: 32px;
+      line-height: 32px;
+    }
+
+    .welcome {
+      margin-top: 32px;
+      margin-bottom: 64px;
+      width: 100%;
+      font-size: 48px;
+      line-height: 1;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+
+  .laptop {
+    display: block;
+
+    &.copyright {
+      margin-top: 40px;
+      width: 448px;
+      max-width: 85vw;
+    }
+  }
+
+  .login-wrapper {
+    justify-content: center;
+    max-width: 100%;
+    flex-direction: column;
+  }
+
+  .welcome-text {
+    display: flex;
+    width: 448px;
+    max-width: 85vw;
+    max-height: 216px;
+    flex-wrap: wrap;
+
+    > h5 {
+      margin-left: 32px;
+    }
+  }
+
+  .input-container {
+    padding: 32px;
+    width: 448px;
+    max-width: 85vw;
+    max-height: 338px;
+
+    > h3 {
+      margin-bottom: 16px;
+      font-size: 32px;
+      line-height: 32px;
+    }
+
+    > input {
+      margin-bottom: 16px;
+      height: 56px;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .buttons {
+      flex-direction: column;
+      align-items: flex-end;
+
+      .forget {
+        margin-right: 0;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .login {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .laptop {
+    &.copyright {
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  .login-page {
+    padding: 0;
+  }
+
+  .login-wrapper {
+    justify-content: flex-start;
+    padding: 64px 0 24px;
+  }
+
+  .welcome-text {
+    max-height: 248px;
+
+    > img {
+      width: 120px;
+    }
+
+    > h5 {
+      margin: 24px 0;
+      width: 100%;
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .welcome {
+      margin: 0 0 40px;
+    }
+  }
+
+  .input-container {
+    overflow-y: initial;
+  }
+}

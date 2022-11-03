@@ -1,0 +1,119 @@
+.menu-container {
+    z-index: 5;
+    display: block;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 8px -4px rgba(22, 34, 51, 0.08), 0px 16px 24px rgba(22, 34, 51, 0.16);
+    border-radius: 16px;
+    position: absolute;
+    width: 720px;
+    height: 494px;
+    right: 0px;
+    top: 5vh;
+}
+
+/* new */
+
+.main-title {
+    background: #060932;
+    border-radius: 16px 16px 0px 0px;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+    cursor: default;
+    height: 56px;
+    padding-left: 40px;
+}
+
+.line-Toggle {
+    display: none;
+}
+
+.menu-detail {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 18px;
+    color: #2958EC;
+    font-family: 'Source Sans Pro';
+    cursor: default;
+}
+
+.menu-info {
+    padding-left: 40px;
+    margin-top: 40px;
+}
+
+.line-bottom {
+    width: 100%;
+    border: 1px solid #E1E1E1;
+    margin-top: 12px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 50px;
+    flex-wrap: wrap;
+    width: 300px;
+}
+
+.info {
+    display: flex;
+    cursor: pointer;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-top: 24px;
+}
+
+.text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    align-items: flex-start;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.08em;
+    color: #323D5D;
+    flex: none;
+    order: 1;
+    padding-left: 16px;
+    padding-top: 24px;
+    flex-grow: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-container {
+        top: -20px;
+        right: -16px;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .menu-detail {
+        background:#FFFFFF
+    }
+
+
+    .line-Toggle {
+        background: #FFFFFF;
+        transform: rotate(90deg);
+        right: 10vw;
+        top: 3vh;
+        position: absolute;
+        display: flex;
+        width: 2px;
+        height: 14px;
+    }
+
+}
